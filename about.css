@@ -1,0 +1,43 @@
+body {
+    background-color: rgb(48, 92, 153);
+}
+
+.model-img {
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  animation: fadeIn 5.5s;
+}
+
+.img-box {
+    margin: auto;
+}
+
+.about-text {
+    margin: auto;
+  width: 50%;
+  padding-top: 30px;
+  text-align: center;
+  background-color: white;
+  height: 500px;
+  font-weight: 500;
+  line-height: 1.5rem;
+  font-size: 16px;
+  padding-bottom: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
+  
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+ }
+
+ .logo {
+    height: 30px;
+    margin-top: 40px;
+    
+ }
