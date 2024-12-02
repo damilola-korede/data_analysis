@@ -15,7 +15,7 @@
     margin-right: 100px;
 }
 .left-section {
-    margin-left: 100px;
+    margin-left: 70px;
     font-weight: 800;
     font-size: 18px;
 }
@@ -35,7 +35,11 @@ body {
 
 @media only screen and (max-width: 650px) {
     .section1 {
-      display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center; /* Ensures text is centered for better readability */
+        padding: 15px;
     }
   }
 
@@ -82,8 +86,8 @@ body {
 }
 .mypic {
     height: 300px;
-    border-radius: 20px;
-    margin-left:370px;
+    border-radius: 200px;
+    margin-left:300px;
     animation: fadeIn 5.5s;
     width: 320px;
 }
@@ -99,11 +103,19 @@ body {
   }
 
 .project-head {
-    text-align: center;
-    font-weight: 800;
+    margin-left: 100px;
+    font-weight: 600;
     margin-top: 30px;
     margin-bottom: 30px;
-    font-size: 34px;
+    font-size: 30px;
+}
+
+.project-head_2 {
+    margin-left: 100px;
+    font-weight: 600;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 30px;
 }
 
 .send-message {
@@ -124,9 +136,20 @@ body {
 
 .project-link {
 color: blue;
+margin-left: 30px;
 }
 .project-link:hover {
     font-weight: 800;
 }
 
- 
+.project-link_2 {
+    color: blue;
+    margin-left: 50px;
+    }
+.project-link_2:hover {
+        font-weight: 800;
+    }
+
+    .highlight {
+        margin-left: 30px;
+    }
