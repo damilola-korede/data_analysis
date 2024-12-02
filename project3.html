@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-       <title> Fungal diversity </title>
+       <title> Initial Price Prediction </title>
        <link rel="stylesheet" href="home.css"> 
        <link rel="stylesheet" href="project3.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,96 +12,122 @@ rel="stylesheet">
     <body>
        
         <div class="navigation-section">
-            <div class="left-section"><a href="index.html">S.Adekunle</a></div>
+            <div class="left-section"><a href="home.html">S.Adekunle</a></div>
             <div class="right-section">
                 <p><a href="about.html">About</a></p> 
-           <p> <a href="https://drive.google.com/file/d/1PQjo6TXBHZO930rw5mPXBkk7xbwNMEIz/view?usp=drive_link">Resume </a></p> 
+           <p> <a href="https://drive.google.com/file/d/1t1RRswncyKbLR7PbBCzGRoyEMJJEM7Dk/view?usp=drive_link">Resume </a></p> 
             </div>
         </div>
 
         <p class="head">
-            Impact of Credit Access on Food Security Among Women Rice 
-            Farmers in Ekiti State
+            Apartment Initial Pricing Analysis and Prediction
         </p>
 
-        <img class="model-img" src="pics/rice-farmers.jpg">
+        <img class="model-img" src="pics/aprt.jpg">
         
         <div>
         <p class="head">
-            Project Overview
+            Objective
         </p>
 
         <p class="description">
-            This project aimed to evaluate how access to credit influences 
-            the food security status of women rice farmers in Ekiti State, Nigeria. 
-            By analyzing data from 46 farmers, the study found that access to credit 
-            significantly improved food security by enabling farmers to invest in inputs 
-            like seeds, fertilizers, and labor.
+            The project aimed to analyze the initial costs of apartments
+             across different boroughs, identify trends, and predict 
+             future values using regression models.
         </p>
          </div>
          
 
          <div>
             <p class="head">
-                Tools & Technologies
+                Dataset
             </p>
     
             <p class="description">
-                SPSS was used for running probit regression to assess the 
-                impact of credit access on food security, while Excel was employed 
-                for organizing data and running descriptive statistics. The Food Security 
-                Index was calculated using expenditure-based methods.
+                Utilized a dataset (obtained from kaggle website) containing apartment intial pricing, 
+                borough information, and related attributes. Preprocessed the data by 
+                removing irrelevant columns (e.g., "Horizontal Enlargement") and 
+                handling missing values.
             </p>
              </div>
 
 
              <div>
                 <p class="head">
-                    Methodology
+                    Key Steps : Exploratory Data Analysis
                 </p>
-        
-                <p class="description">
-                    I applied probit regression to identify the factors influencing 
-                    food security, with credit access being a significant variable. 
-                    The Food Security Index was computed based on the household food 
-                    expenditure method, with a cutoff value to determine food-secure and 
-                    food-insecure households. Budgetary analysis provided insights into 
-                    the profitability of rice farming among credit-accessing farmers.
+            </div>
+            
+            <img class="model-img" src="pics/price_apt.png">
+                 <div>
+                 <p class="description_1">
+                    Histogram showing price distribution.
                 </p>
                  </div>
-            
 
+                 
+                 <img class="model-img" src="pics/boro_apt.png">
+                 <div>
+                 <p class="description_1">
+                    Histogram showing apartment distribution.</p>
+                 </div>
+
+
+                 <img class="model-img" src="pics/boro vs price.png">
+                 <div>
+                 <p class="description_1">
+                    Bar chart comparing initial costs by borough.</p>
+                 </div>
+
+        
                  <div>
                     <p class="head">
-                        Results & Interpretation
+                        Exploratory Data Analysis Insight
                     </p>
             
                     <p class="description">
-                        The probit regression analysis showed that credit access 
-                        significantly increased the likelihood of food security among 
-                        the women rice farmers, with a positive coefficient of 0.523 (p < 0.05). 
-                        The food security index revealed that 42.1% of women with credit access 
-                        were food secure compared to only 11.5% of those without credit access. 
-                        These results highlight the crucial role of financial inclusion in enhancing 
-                        food security.
+                        The analysis of apartment data across Brooklyn, 
+                        Staten Island, and Queens reveals notable differences in price and
+                        representation. Queens stands out with the highest initial apartment
+                         prices, nearing 1 million dollars, while Staten Island 
+                       shows moderate prices and Brooklyn has the lowest. In terms of
+                        representation, Staten Island dominates with the most 
+                       apartments listed, followed by Queens, and Brooklyn with the least. 
+                       Price distribution highlights a significant gap, as 
+                       most apartments are priced around $100,000, with a smaller cluster 
+                       at $500,000 and none in between, suggesting 
+                       distinct market segments or a potential absence of data for intermediate
+                        price ranges.
                     </p>
                      </div>
 
-                    
                      <div>
-                        <p class="figure-tag">
-                            Table showing distribution of Respondents Base of Food Security Level.
+                        <p class="head">
+                            Model Building
                         </p>
-                     <img class="result" src="pics/food-secure.png">
-                    </div>
+                
+                        <p class="description">
+                            Built a Ridge regression pipeline:
+                            One-hot encoding of categorical features.
+                            Imputation for missing values.
+                            Baseline model comparison using Mean Absolute Error (MAE).
+                        </p>
+                         </div>
 
-                    <div>
-                        <p class="figure-tag">
-                            Probit Analysis to know factors influencing Food Security status of 
-                            women rice farmers in Ekiti state. 
-                        </p>
-                     <img class="result" src="pics/Probit.png">
+                    
+                         <div>
+                            <p class="head">
+                               Feature Importance
+                            </p>
                         </div>
+                     
+                        <img class="model-img" src="pics/feat_apt.png">
+                        <div>
+                        <p class="description_1">
+                            Feature importance in predicting Initial prices                       </p>
+                        </div>
+
+
         <p class="send-message">Send me a message</p>
         <p class="message-text">For projects, offers or just want 
             to connect send me a mail</p>
