@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-       <title> Fungal diversity </title>
+       <title> Bankruptcy Prediction </title>
        <link rel="stylesheet" href="home.css"> 
        <link rel="stylesheet" href="project2.css">
        <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,83 +12,156 @@ rel="stylesheet">
     <body>
        
         <div class="navigation-section">
-            <div class="left-section"><a href="index.html">S.Adekunle</a></div>
+            <div class="left-section"><a href="home.html">S.Adekunle</a></div>
             <div class="right-section">
                 <p><a href="about.html">About</a></p> 
-           <p> <a href="https://drive.google.com/file/d/1PQjo6TXBHZO930rw5mPXBkk7xbwNMEIz/view?usp=drive_link">Resume </a></p> 
+           <p> <a href="https://drive.google.com/file/d/1t1RRswncyKbLR7PbBCzGRoyEMJJEM7Dk/view?usp=drive_link">Resume </a></p> 
             </div>
         </div>
 
         <p class="head">
-            Evaluation of Fungal Communities in Maize 
-            Rhizosphere Soil for Sustainable Agriculture
+            Predicting Bankruptcy Using Machine Learning
+             (Random Forest Classifier)
         </p>
 
-        <img class="model-img" src="pics/rhizo.png">
+        <img class="model-img" src="pics/predict.png">
         
         <div>
         <p class="head">
-            Project Overview
+            Objective
         </p>
 
         <p class="description">
-            This project aimed to evaluate fungal diversity in the 
-            rhizosphere soil of maize plants in Oyo State, Nigeria, using 
-            statistical analysis of species abundance and community structure. 
-            The project provided insights into the ecological roles of dominant 
-            fungi like Aspergillus and Trichoderma in improving soil fertility 
-            and supporting sustainable agricultural practices.
+            The goal of this project was to develop a machine learning
+            model to predict whether a company would go bankrupt based 
+            on financial indicators. The project involved preprocessing 
+            an imbalanced dataset, training a model, and evaluating its 
+            performance to achieve high accuracy and reliability.
         </p>
          </div>
-         <img class="result" src="pics/locations.png">
-
+        
 
          <div>
             <p class="head">
-                Tools & Technologies
+                Dataset
             </p>
     
             <p class="description">
-                I used SPSS to conduct ANOVA and descriptive statistics for 
-                analyzing fungal abundance and diversity. The Shannon-Wiener index 
-                was calculated to assess species richness, and cluster analysis was 
-                applied to identify patterns across different sampling locations.
-
+                Target Variable: Bankrupt? (binary classification: 1 for bankruptcy, 0 for no bankruptcy).
+                Features: Financial attributes of companies such as debt ratio, working capital, and profitability
+                metrics.
+                Imbalance: The dataset exhibited class imbalance, with significantly more non-bankrupt companies 
+                than bankrupt ones.
             </p>
              </div>
 
 
              <div>
                 <p class="head">
-                    Methodology
+                    Key Steps : Exploratory Data Analysis
+                </p>
+                
+                <img class="model-img" src="pics/class balance.png">
+                <p class="description_1">
+                    Class balance was visualized, revealing significant 
+                    imbalance in the Bankrupt? target variable.
+                </p>
+                 </div>
+
+
+             <div>
+                <p class="head">
+                    Data Splitting:
                 </p>
         
                 <p class="description">
-                    ANOVA revealed significant differences in fungal abundance across 
-                    various farm locations (p < 0.05). The Shannon-Wiener index showed high 
-                    species richness in areas with organic farming practices. Cluster analysis 
-                    grouped similar fungal populations, indicating that specific environmental 
-                    factors influence fungal diversity.
-
-
+                    The dataset was split into training and testing sets with an 
+                    80/20 ratio using train_test_split.
                 </p>
                  </div>
             
 
                  <div>
                     <p class="head">
-                        Results & Interpretation
+                        Oversampling
                     </p>
             
                     <p class="description">
-                        The analysis showed that farms with high organic matter had a 
-                        greater abundance of beneficial fungi, particularly Trichoderma spp.,
-                         which is known for improving soil structure and suppressing pathogens.
+                        Addressed the class imbalance in the training set using 
+                        RandomOverSampler, ensuring both classes were equally
+                        represented.
                     </p>
                      </div>
                  
-                     <img class="result" src="pics/fungal.incidence.png">
-                     <img class="result" src="pics/incidence-rate.png">
+
+                     <div>
+                        <p class="head">
+                            Performance Evaluation
+                        </p>
+                    </div>
+
+                    <img class="model-img" src="pics/conf_matr.png">
+                 <div>
+                 <p class="description_1">
+                    confusion matrix plot
+                </p>
+                 </div>
+            
+
+                 <div>
+                    <p class="head">
+                        Insights from the Confusion Matrix
+                    </p>
+            
+                    <p class="description">
+                        The model demonstrates strong performance in identifying 
+                        non-bankrupt companies, achieving a very high true negative count 
+                        of 1302 and only a small number of false positives (11). This 
+                        indicates a low false positive rate, making it highly reliable 
+                        in classifying companies that are not bankrupt. However, the model
+                         struggles with accurately identifying bankrupt companies, as 
+                         evidenced by a low true positive count of 16 and a relatively 
+                         high false negative count of 35
+                    </p>
+                     </div>
+
+                
+                     <img class="model-img" src="pics/feat_imp.png">
+                 <div>
+                 <p class="description_1">
+                    Feature importance was visualized to identify the most critical financial 
+                    metrics influencing bankruptcy prediction.
+                </p>
+                 </div>
+
+                
+                 <div>
+                    <p class="head">
+                        Model Saving
+                    </p>
+            
+                    <p class="description">
+                        The trained model was serialized using Python’s 
+                        pickle library for future use.
+                    </p>
+                     </div>
+
+
+                     <div>
+                        <p class="head">
+                            Conclusion
+                        </p>
+                
+                        <p class="description">
+                            The project successfully developed a Random Forest
+                            model capable of predicting bankruptcy with high accuracy, 
+                            effectively handling class imbalance and identifying key 
+                            financial indicators driving predictions. This solution 
+                            has potential applications in financial risk assessment 
+                            and early warning systems for stakeholders.
+                        </p>
+                         </div>
+
 
         <p class="send-message">Send me a message</p>
         <p class="message-text">For projects, offers or just want 
