@@ -77,10 +77,12 @@ rel="stylesheet">
                       To move beyond raw numbers, I created core business metrics using DAX. 
                       These measures form the backbone of the dashboard and ensure that all visuals
                       remain consistent and accurate as filters are applied.
-                      
+                        
+                      <p class="description">
                       Total Revenue was calculated as:
                       Total_revenue = SUMX(Sheet1,Sheet1[Unit Price]*Sheet1[Quantity])
-
+                      </p>
+                    
                       Total Cost was defined as:
                       Total_cost = SUMX(Sheet1,RELATED('Sheet1 (2)'[Cost Price])*Sheet1[Quantity])
 
