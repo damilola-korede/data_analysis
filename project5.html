@@ -81,16 +81,19 @@ rel="stylesheet">
                       
                       Total Revenue was calculated as:
                       Total_revenue = SUMX(Sheet1,Sheet1[Unit Price]*Sheet1[Quantity])
-                      
+                      <img class="model-img" src="pics/dax_tr.png">
                     
                       Total Cost was defined as:
                       Total_cost = SUMX(Sheet1,RELATED('Sheet1 (2)'[Cost Price])*Sheet1[Quantity])
-
+                      <img class="model-img" src="pics/dax_tc.png">
+                        
                       From these two measures, Profit was derived to reflect true business performance:
                       Profit = [Total_revenue] - [Total_cost]
+                      <img class="model-img" src="pics/dax_profit.png">
 
                       Finally, to assess efficiency rather than just volume, I calculated Profit Margin:
                       Profit_margin = DIVIDE([Profit],[Total_revenue]) 
+                      <img class="model-img" src="pics/dax_pma.png">
 
                       These measures automatically respond to slicers such as date, category, or supplier, allowing
                       stakeholders to view profitability from multiple angles without recalculating figures manually.
