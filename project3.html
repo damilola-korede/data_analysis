@@ -1,139 +1,207 @@
 <!DOCTYPE html>
-<html>
-    <head>
-       <title> Initial Price Prediction </title>
-       <link rel="stylesheet" href="home.css"> 
-       <link rel="stylesheet" href="project3.css">
-       <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" 
-rel="stylesheet">
-    </head>
-    <body>
-       
-        <div class="navigation-section">
-            <div class="left-section"><a href="index.html">S.Adekunle</a></div>
-            <div class="right-section">
-                <p><a href="about.html">About</a></p> 
-           <p> <a href="https://drive.google.com/file/d/1_CsM5afkT_y94GV1ARpXX8L6drMx3aSq/view?usp=sharing">Resume </a></p> 
-            </div>
-        </div>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Apartment Pricing Prediction — Sodiq Adekunle</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #0a0a0b; --surface: #111114; --card: #16161a; --border: #2a2a32; --accent: #c8f542; --accent2: #5b8dee; --text: #e8e8ec; --muted: #6b6b78; --white: #ffffff; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.4; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; border-bottom: 1px solid transparent; transition: border-color 0.3s, background 0.3s; }
+  nav.scrolled { border-color: var(--border); background: rgba(10,10,11,0.85); backdrop-filter: blur(12px); }
+  .nav-logo { font-weight: 800; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .page-hero { min-height: 55vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 10rem 3rem 4rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .page-hero-bg { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 80px 80px; opacity: 0.15; }
+  .page-hero-glow { position: absolute; top: 0; right: 0; width: 500px; height: 500px; background: radial-gradient(circle, rgba(200,245,66,0.05) 0%, transparent 70%); }
+  .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--muted); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 2rem; position: relative; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: '←'; }
+  .project-tag { display: inline-flex; align-items: center; background: rgba(91,141,238,0.1); border: 1px solid rgba(91,141,238,0.2); color: var(--accent2); font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; padding: 0.4rem 0.9rem; margin-bottom: 1.5rem; position: relative; }
+  .page-title { font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 800; color: var(--white); letter-spacing: -0.03em; line-height: 1.05; max-width: 800px; position: relative; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
+  .page-title span { color: var(--accent); font-style: italic; font-weight: 400; }
+  .page-meta { display: flex; gap: 2rem; flex-wrap: wrap; position: relative; }
+  .meta-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.3rem; }
+  .meta-value { font-size: 0.82rem; color: var(--text); font-weight: 600; }
+  .content-wrap { max-width: 900px; margin: 0 auto; padding: 5rem 3rem; }
+  .section-block { margin-bottom: 4rem; }
+  .block-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+  .block-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 60px; }
+  .block-title { font-size: 1.4rem; font-weight: 800; color: var(--white); letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+  .block-text { font-size: 0.875rem; line-height: 1.95; color: #8888a0; font-weight: 400; margin-bottom: 1rem; }
+  .block-text strong { color: var(--text); font-weight: 600; }
+  .img-card { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; margin: 2rem 0; position: relative; overflow: hidden; }
+  .img-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); }
+  .img-card img { width: 100%; height: auto; display: block; }
+  .img-caption { font-size: 0.7rem; color: var(--muted); margin-top: 0.75rem; letter-spacing: 0.05em; font-style: italic; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .info-card { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+  .info-card:hover { border-color: var(--accent); }
+  .info-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent2), transparent); }
+  .info-card-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.5rem; }
+  .info-card-value { font-size: 0.85rem; color: var(--text); font-weight: 600; line-height: 1.6; }
+  .insight-list { list-style: none; margin: 1.5rem 0; }
+  .insight-list li { padding: 0.85rem 1rem 0.85rem 1.5rem; border-left: 2px solid var(--border); font-size: 0.85rem; color: #8888a0; line-height: 1.7; margin-bottom: 0.5rem; font-weight: 400; transition: border-color 0.2s, color 0.2s; }
+  .insight-list li:hover { border-color: var(--accent); color: var(--text); }
+  .insight-list li strong { color: var(--text); font-weight: 600; }
+  .conclusion-box { background: var(--card); border: 1px solid var(--border); padding: 2.5rem; position: relative; overflow: hidden; margin-top: 3rem; }
+  .conclusion-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2), transparent); }
+  .project-nav { border-top: 1px solid var(--border); padding: 3rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .proj-nav-link { display: flex; flex-direction: column; gap: 0.4rem; text-decoration: none; max-width: 300px; }
+  .proj-nav-dir { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .proj-nav-title { font-size: 0.9rem; font-weight: 700; color: var(--white); transition: color 0.2s; }
+  .proj-nav-link:hover .proj-nav-title { color: var(--accent); }
+  .contact-strip { background: var(--surface); border-top: 1px solid var(--border); padding: 4rem 3rem; text-align: center; }
+  .contact-strip p { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.75rem; }
+  .contact-strip a { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.95rem; border-bottom: 1px solid rgba(200,245,66,0.3); padding-bottom: 0.1rem; }
+  footer { padding: 1.5rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  footer p { font-size: 0.7rem; color: var(--muted); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 768px) { nav { padding: 1.2rem 1.5rem; } .nav-links { gap: 1.2rem; } .page-hero { padding: 8rem 1.5rem 3rem; } .content-wrap { padding: 3rem 1.5rem; } .two-col { grid-template-columns: 1fr; } .project-nav { padding: 2rem 1.5rem; flex-direction: column; } footer { padding: 1.5rem; flex-direction: column; } }
+</style>
+</head>
+<body>
 
-        <p class="head">
-            Apartment Initial Pricing Analysis and Prediction
-        </p>
+<nav id="nav">
+  <a href="index.html" class="nav-logo">S.A</a>
+  <ul class="nav-links">
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="https://drive.google.com/file/d/1_CsM5afkT_y94GV1ARpXX8L6drMx3aSq/view?usp=sharing" target="_blank">Résumé ↗</a></li>
+  </ul>
+</nav>
 
-        <img class="model-img" src="pics/aprt.jpg">
-        
-        <div>
-        <p class="head">
-            Objective
-        </p>
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-glow"></div>
+  <a href="index.html#projects" class="back-link">Back to Projects</a>
+  <div class="project-tag">Python · Ridge Regression · EDA</div>
+  <h1 class="page-title">Apartment Initial Pricing<br><span>Analysis & Prediction</span></h1>
+  <div class="page-meta">
+    <div class="meta-item"><div class="meta-label">Type</div><div class="meta-value">Regression · EDA</div></div>
+    <div class="meta-item"><div class="meta-label">Model</div><div class="meta-value">Ridge Regression Pipeline</div></div>
+    <div class="meta-item"><div class="meta-label">Libraries</div><div class="meta-value">Pandas · Matplotlib · Seaborn · Plotly · Sklearn · ipywidgets</div></div>
+  </div>
+</section>
 
-        <p class="description">
-            The project aimed to analyze the initial costs of apartments
-             across different boroughs, identify trends, and predict 
-             future values using regression models.
-        </p>
-         </div>
-         
+<div class="content-wrap">
 
-         <div>
-            <p class="head">
-                Dataset
-            </p>
-    
-            <p class="description">
-                Utilized a dataset (obtained from kaggle website) containing apartment intial pricing, 
-                borough information, and related attributes. Preprocessed the data by 
-                removing irrelevant columns (e.g., "Horizontal Enlargement") and 
-                handling missing values.
-            </p>
-             </div>
+  <div class="section-block reveal">
+    <div class="block-label">01 — Overview</div>
+    <div class="block-title">Objective</div>
+    <p class="block-text">This project aimed to <strong>analyze the initial costs of apartments across different New York boroughs</strong>, identify pricing trends, and predict future values using regression models.</p>
+    <p class="block-text">The dataset was sourced from Kaggle and contained apartment initial pricing, borough information, and related property attributes. Preprocessing involved removing irrelevant columns (e.g., "Horizontal Enlargement") and handling missing values.</p>
+  </div>
 
+  <div class="section-block reveal">
+    <div class="block-label">02 — EDA</div>
+    <div class="block-title">Exploratory Data Analysis</div>
 
-             <div>
-                <p class="head">
-                    Key Steps : Exploratory Data Analysis
-                </p>
-            </div>
-            
-            <img class="model-img" src="pics/price_apt.png">
-                 <div>
-                 <p class="description_1">
-                    Histogram showing price distribution.
-                </p>
-                 </div>
+    <div class="img-card">
+      <img src="pics/price_apt.png" alt="Price Distribution Histogram"/>
+      <div class="img-caption">Price distribution — most apartments cluster around $100K with a smaller group near $500K</div>
+    </div>
 
-                 
-                 <img class="model-img" src="pics/boro_apt.png">
-                 <div>
-                 <p class="description_1">
-                    Histogram showing apartment distribution.</p>
-                 </div>
+    <div class="img-card">
+      <img src="pics/boro_apt.png" alt="Apartment Distribution by Borough"/>
+      <div class="img-caption">Apartment distribution by borough — Staten Island leads, followed by Queens, then Brooklyn</div>
+    </div>
 
+    <div class="img-card">
+      <img src="pics/boro vs price.png" alt="Initial Cost by Borough"/>
+      <div class="img-caption">Average initial cost by borough — Queens commands the highest prices near $1M</div>
+    </div>
+  </div>
 
-                 <img class="model-img" src="pics/boro vs price.png">
-                 <div>
-                 <p class="description_1">
-                    Bar chart comparing initial costs by borough.</p>
-                 </div>
+  <div class="section-block reveal">
+    <div class="block-label">03 — Insights</div>
+    <div class="block-title">Key EDA Findings</div>
+    <ul class="insight-list">
+      <li><strong>Queens has the highest initial apartment prices</strong> — nearing $1 million on average, making it the premium borough in this dataset.</li>
+      <li><strong>Staten Island leads in apartment count</strong> — most apartments listed, suggesting higher supply despite moderate pricing.</li>
+      <li><strong>Brooklyn has the lowest prices</strong> — and the least representation in the dataset, suggesting a distinct market profile.</li>
+      <li><strong>Bimodal price distribution</strong> — most apartments cluster around $100K, with a smaller group near $500K and virtually nothing in between, suggesting distinct market segments.</li>
+    </ul>
+  </div>
 
-        
-                 <div>
-                    <p class="head">
-                        Exploratory Data Analysis Insight
-                    </p>
-            
-                    <p class="description">
-                        The analysis of apartment data across Brooklyn, 
-                        Staten Island, and Queens reveals notable differences in price and
-                        representation. Queens stands out with the highest initial apartment
-                         prices, nearing 1 million dollars, while Staten Island 
-                       shows moderate prices and Brooklyn has the lowest. In terms of
-                        representation, Staten Island dominates with the most 
-                       apartments listed, followed by Queens, and Brooklyn with the least. 
-                       Price distribution highlights a significant gap, as 
-                       most apartments are priced around $100,000, with a smaller cluster 
-                       at $500,000 and none in between, suggesting 
-                       distinct market segments or a potential absence of data for intermediate
-                        price ranges.
-                    </p>
-                     </div>
+  <div class="section-block reveal">
+    <div class="block-label">04 — Model</div>
+    <div class="block-title">Model Building</div>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="info-card-label">Algorithm</div>
+        <div class="info-card-value">Ridge Regression with regularization to prevent overfitting on sparse features</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Pipeline</div>
+        <div class="info-card-value">One-hot encoding of categorical features + Imputation for missing values</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Evaluation Metric</div>
+        <div class="info-card-value">Mean Absolute Error (MAE) — baseline model comparison to measure improvement</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Interactivity</div>
+        <div class="info-card-value">ipywidgets added interactive controls for exploratory filtering in Jupyter</div>
+      </div>
+    </div>
+  </div>
 
-                     <div>
-                        <p class="head">
-                            Model Building
-                        </p>
-                
-                        <p class="description">
-                            Built a Ridge regression pipeline:
-                            One-hot encoding of categorical features.
-                            Imputation for missing values.
-                            Baseline model comparison using Mean Absolute Error (MAE).
-                        </p>
-                         </div>
+  <div class="section-block reveal">
+    <div class="block-label">05 — Features</div>
+    <div class="block-title">Feature Importance</div>
+    <div class="img-card">
+      <img src="pics/feat_apt.png" alt="Feature Importance in Apartment Pricing"/>
+      <div class="img-caption">Feature importance — variables most predictive of initial apartment price</div>
+    </div>
+    <p class="block-text">Feature importance analysis reveals which property attributes — borough, unit type, building class — carry the most predictive weight. This can guide real estate investors on <strong>which variables to prioritize when estimating property value</strong>.</p>
+  </div>
 
-                    
-                         <div>
-                            <p class="head">
-                               Feature Importance
-                            </p>
-                        </div>
-                     
-                        <img class="model-img" src="pics/feat_apt.png">
-                        <div>
-                        <p class="description_1">
-                            Feature importance in predicting Initial prices                       </p>
-                        </div>
+  <div class="conclusion-box reveal">
+    <div class="block-label">06 — Conclusion</div>
+    <p class="block-text">This project successfully explored and modeled New York apartment pricing across boroughs. By combining thorough EDA, a clean Ridge regression pipeline, and interactive visualization, the analysis provides <strong>both statistical rigor and practical interpretability</strong> for real estate pricing decisions.</p>
+  </div>
 
+</div>
 
-        <p class="send-message">Send me a message</p>
-        <p class="message-text">For projects, offers or just want 
-            to connect send me a mail</p>
-            <p class="mail">sodiqadekunle54321@gmail.com</p>
-      
-            <script src="./app.js"></script>
-    </body>
+<div class="project-nav">
+  <a href="project2.html" class="proj-nav-link">
+    <span class="proj-nav-dir">← Previous Project</span>
+    <span class="proj-nav-title">Bankruptcy Prediction</span>
+  </a>
+  <a href="project1.html" class="proj-nav-link" style="text-align:right;">
+    <span class="proj-nav-dir">Next Project →</span>
+    <span class="proj-nav-title">K-Means Clustering</span>
+  </a>
+</div>
+
+<div class="contact-strip">
+  <p>Interested in working together?</p>
+  <a href="mailto:sodiqadekunle54321@gmail.com">sodiqadekunle54321@gmail.com</a>
+</div>
+
+<footer>
+  <p>© 2025 Sodiq Adekunle</p>
+  <p>Data Scientist & Analyst — Lagos, Nigeria</p>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
-
