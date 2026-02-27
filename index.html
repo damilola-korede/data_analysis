@@ -1,220 +1,901 @@
 <!DOCTYPE html>
-<html>
-    <head>
-       <title> myportfolio</title>
-       <link rel="stylesheet" href="home.css"> 
-       <link rel="stylesheet" href="faq.css">
-       <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" 
-rel="stylesheet">
-    </head>
-    <body>
-       
-        <div class="navigation-section">
-            <div class="left-section">S.Adekunle</div>
-            <div class="right-section">
-           <p><a href="about.html">About</a></p> 
-           <p> <a href="https://drive.google.com/file/d/1_CsM5afkT_y94GV1ARpXX8L6drMx3aSq/view?usp=sharing">Resume </a></p> 
-           
-            </div>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sodiq Adekunle — Data Scientist & Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0b;
+    --surface: #111114;
+    --card: #16161a;
+    --border: #2a2a32;
+    --accent: #c8f542;
+    --accent2: #5b8dee;
+    --text: #e8e8ec;
+    --muted: #6b6b78;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-follower {
+    width: 40px; height: 40px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.25s ease;
+    opacity: 0.4;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  nav.scrolled {
+    border-color: var(--border);
+    background: rgba(10,10,11,0.85);
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    gap: 4rem;
+  }
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+  .hero-glow {
+    position: absolute;
+    top: 20%; left: 30%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(200,245,66,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(200,245,66,0.08);
+    border: 1px solid rgba(200,245,66,0.2);
+    color: var(--accent);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-name span {
+    color: var(--accent);
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+  .hero-title {
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    color: var(--muted);
+    margin-bottom: 2rem;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-desc {
+    font-size: 0.85rem;
+    line-height: 1.9;
+    color: #8888a0;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0b;
+    padding: 0.85rem 2rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(200,245,66,0.3);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    cursor: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+  }
+  .skill-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .skill-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .skill-item:hover { border-color: var(--accent); color: var(--accent); }
+  .skill-item strong {
+    display: block;
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+  .card-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .stat-row {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; margin-top: 0.2rem; }
+
+  /* SECTION COMMON */
+  section { padding: 6rem 3rem; }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .section-num {
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    font-weight: 400;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 200px;
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--surface); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .project-card {
+    background: var(--card);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover { background: #1a1a20; }
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .project-card:hover::after { transform: scaleX(1); }
+  .project-num {
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  .project-tool-tag {
+    display: inline-block;
+    background: rgba(91,141,238,0.1);
+    border: 1px solid rgba(91,141,238,0.2);
+    color: var(--accent2);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  .project-desc {
+    font-size: 0.78rem;
+    line-height: 1.85;
+    color: #6b6b80;
+    flex: 1;
+    margin-bottom: 2rem;
+  }
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .project-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: gap 0.2s;
+  }
+  .project-link:hover { gap: 0.7rem; }
+  .project-link::after { content: '→'; }
+  .project-link.github { color: var(--muted); }
+  .project-link.github:hover { color: var(--text); }
+
+  /* ABOUT */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+  .about-text p {
+    font-size: 0.85rem;
+    line-height: 2;
+    color: #8888a0;
+    margin-bottom: 1.5rem;
+  }
+  .about-text p strong { color: var(--text); font-weight: 400; }
+  .tools-section { margin-top: 3rem; }
+  .tools-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tool-tag {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.72rem;
+    padding: 0.35rem 0.8rem;
+    letter-spacing: 0.05em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .tool-tag:hover { border-color: var(--accent); color: var(--accent); }
+  .about-right {}
+  .experience-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    margin-bottom: 1px;
+    position: relative;
+  }
+  .experience-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border);
+    transition: background 0.2s;
+  }
+  .experience-card:hover::before { background: var(--accent); }
+  .exp-type {
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .exp-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .exp-desc {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--surface);
+    text-align: center;
+    padding: 8rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #contact::before {
+    content: 'CONNECT';
+    position: absolute;
+    font-family: 'Syne', sans-serif;
+    font-size: 20vw;
+    font-weight: 800;
+    color: rgba(255,255,255,0.015);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .contact-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .contact-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+  .contact-heading em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+  .contact-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+  .contact-email {
+    display: inline-block;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 0.2rem;
+    margin-bottom: 3rem;
+    transition: color 0.2s;
+  }
+  .contact-email:hover { color: var(--accent); }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    padding: 0.7rem 1.5rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">S.A</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://drive.google.com/file/d/1_CsM5afkT_y94GV1ARpXX8L6drMx3aSq/view?usp=sharing" target="_blank">Résumé ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-lines"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1 class="hero-name">Sodiq<br><span>Adekunle</span></h1>
+    <p class="hero-title">Data Scientist & Analyst</p>
+    <p class="hero-desc">
+      Specializing in machine learning, data visualization, and business intelligence.
+      I turn messy data into clear, actionable insights that drive real decisions.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-label">// Core Expertise</div>
+      <div class="card-title">Data Science & Analytics</div>
+      <div class="skill-grid">
+        <div class="skill-item">
+          <strong>Data Analysis</strong>
+          Python · Pandas · NumPy
         </div>
-       
-        <div class="section1">
-            <div>
-                <p class="name-paragraph">Hi, I am Sodiq Adekunle</p>
-                <p class="intro-paragraph">Data Scientist and Analyst specializing in Research, Business Analysis,
-                    machine learning, data visualization, and generating actionable insights.</p>
-                    <button class="project-button"> My projects</button>
-            </div>
-            <div>
-                <img class="mypic" src="pics/mypic.jpeg" alt="">
-            </div>
-            </div>
-
-
-            <div class="project-head">What I do</div>
-
-        
-            <div class="faq">
-                <div class="question">
-                   <p class="head">1. <span class="highlight">Data Science and Analysis</span></p>
-                </div>
-    
-                <div class="answer">
-                    <p>Python, Pandas, Numpy, Matplotlib, Seaborn, Plotly, PowerBI.
-                    </p>
-                </div>
-            </div>
-    
-
-            <div class="faq">
-                <div class="question">
-                   <p class="head">2.<span class="highlight">Machine Learning</span></p>
-                </div>
-    
-                <div class="answer">
-                    <p>
-                        Scikit-learn.
-                    </p>
-                </div>
-            </div>
-
-
-
-
-        <div class="project-head_2">My Projects</div>
-
-            <div class="faq">
-            <div class="question">
-                <p class="head">1. <span class="highlight">Sales Performance & Profitability Dashboard — 
-                    A Power BI Case Study</span></p>
-            </div>
-            
-            <div class="answer">
-                <p>In many retail businesses, large volumes of sales data exist, but decision-makers still 
-                    struggle to answer simple questions: Are we truly profitable? Which products and suppliers
-                    drive value? When do we actually make money?</p>
-                    <p>
-                        Power BI was the primary analytics and visualization tool. Power Query was used for data cleaning,
-                        transformation, and preparation to ensure accuracy and consistency before analysis. DAX (Data Analysis Expressions)
-                        was applied to create dynamic measures such as revenue, profit, and profit margin.
-                    </p>
-                    <a class="project-link" href="project5.html">Case study</a>
-                </div>
-            </div>
-
-
-        <div class="faq">
-            <div class="question">
-               <p class="head">2. <span class="highlight">📊 SQL CASE STUDY: Car Sales Performance Analysis </span></p>
-            </div>
-
-            <div class="answer" >
-                <p>This project analyzes a car sales dataset, containing transaction-level data on 
-                    vehicle purchases, customer demographics, pricing, dealer information, and sales quantities. 
-                    The objective was to use SQL queries to extract business insights related to customer income 
-                    distribution, total revenue, dealer performance, and company-level sales trends.</p>
-                    
-                    <p>
-                        The analysis was performed using structured SQL queries to support decision-making for sales
-                        trategy, customer segmentation, and revenue optimization.
-                    </p>
-                    <a class="project-link" href="#"></a>
-                    <a class="project-link_2" href="https://github.com/damilola-korede/SQL-Code/blob/main/Car%20Sales%20Data%20SQLQuery4.sql" target="_blank">Link to Github</a>
-            </div>
+        <div class="skill-item">
+          <strong>Visualization</strong>
+          Power BI · Plotly · Seaborn
         </div>
-        
-        
-        <div class="faq">
-            <div class="question">
-                <p class="head">3. <span class="highlight">Development of Multiple
-                Linear Regression Models for the Prediction of Noiler Chicken Egg Weight - SAS and Excel Case Study</span></p>
-            </div>
-            
-            <div class="answer">
-                <p>This project aimed to predict the egg weight of Noiler chickens using external egg parameters (egg 
-                    length, width, etc.) through regression analysis.</p>
-                    <p>
-                        SAS was used for running multiple linear regression models and Excel for data cleaning and management. 
-                        Visualizations were created using Python’s matplotlib library.
-                    </p>
-                    <a class="project-link" href="project4.html">Case study</a>
-                </div>
-            </div>
-
-        
-        <div class="faq">
-            <div class="question">
-               <p class="head">4. <span class="highlight">Clustering Small Business Owners Using K-Means - EDA Analysis and Model 
-               Building with python </span></p>
-            </div>
-
-            <div class="answer" >
-                <p>This project aimed to analyze the financial profiles of small business owners and non-business owners, identify
-                    patterns, and create clusters of small business owners with similar financial characteristics. The study involved exploratory 
-                    data analysis, dimensionality reduction, and clustering using machine learning techniques.</p>
-                    
-                    <p>
-                        The project utilized Python with Pandas and NumPy for data analysis and Matplotlib, Seaborn,
-                         and Plotly for visualizations. Machine learning tasks included K-Means Clustering for 
-                         segmentation and PCA for dimensionality reduction, both implemented using scikit-learn.
-                    </p>
-                    <a class="project-link" href="project1.html">Case study</a>
-                    <a class="project-link_2" href="https://github.com/damilola-korede/Python_Data_Analysis_codes/blob/main/Kmeans%20Clustering%20for%20small%20businesses.ipynb" target="_blank">Link to Github</a>
-            </div>
+        <div class="skill-item">
+          <strong>Machine Learning</strong>
+          Scikit-learn · SAS
         </div>
-
-
-
-        <div class="faq">
-            <div class="question">
-                <p class="head">5. <span class="highlight">Predicting Bankruptcy Using Machine Learning - EDA Analysis and Model
-                Building with python</span></p>
-            </div>
-            
-            <div class="answer">
-                <p>The goal of this project was to develop a machine learning model 
-                    to predict whether a company would go bankrupt based on financial 
-                    indicators. The project involved preprocessing an imbalanced dataset, 
-                    training a model, and evaluating its performance to achieve high 
-                    accuracy and reliability.</p>
-                    <p>
-                         
-                        Pandas and NumPy were used for data preprocessing and Matplotlib and Seaborn 
-                        for visualizations. Scikit-learn was used to train and evaluate a 
-                        Random Forest Classifier, with performance assessed using metrics like 
-                        the confusion matrix.
-
-                    </p>
-                    <a class="project-link" href="project2.html">Case study</a>
-                    <a class="project-link_2" href="https://github.com/damilola-korede/Python_Data_Analysis_codes/blob/main/Bankruptcy.ipynb" target="_blank">Link to Github</a>
-            </div>
+        <div class="skill-item">
+          <strong>Databases</strong>
+          SQL · Excel · Power Query
         </div>
-
-
-        <div class="faq">
-            <div class="question">
-                <p class="head">6. <span class="highlight">Apartment Initial Pricing 
-                    Analysis and Prediction - EDA Analysis and Model Building with python </span></p>
-            </div>
-            
-            <div class="answer">
-                <p>The project aimed to analyze the initial costs of apartments 
-                    across different boroughs, identify trends, and predict future 
-                    values using regression models.</p>
-                    <p>
-                        The project used pandas for data handling, matplotlib, seaborn,
-                        and plotly.express for visualization, and sklearn with Ridge 
-                        regression for modeling. ipywidgets added interactivity to the analysis.
-                    </p>
-                    <a class="project-link" href="project3.html">Case study</a>
-                    <a class="project-link_2" href="https://github.com/damilola-korede/Python_Data_Analysis_codes/blob/main/Initial%20Price%20Prediction.ipynb" target="_blank">Link to Github</a>
-            </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Projects</div>
         </div>
+        <div class="stat">
+          <div class="stat-num">4+</div>
+          <div class="stat-label">Tools</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">ML</div>
+          <div class="stat-label">Specialist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        
-    
-        <p class="send-message">Send me a message</p>
-        <p class="message-text">For projects, offers or just want 
-            to connect send me a mail</p>
-            <p class="mail">sodiqadekunle54321@gmail.com</p>
-      
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">01 /</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
 
-            <div class="logo-box">
-                <a href="https://x.com/Adekunl40642977"><img class="logo" src="pics/x-logo-removebg-preview.png"></a>
-                    <a href="https://www.linkedin.com/in/sodiq-adekunle-79381a201/"><img class="logo" src="pics/linked2-removebg-preview.png"></a>
-            </div>
+  <div class="projects-grid">
 
-            <script src="./app.js"></script>
-    </body>
+    <div class="project-card reveal">
+      <div class="project-num">PROJECT 01</div>
+      <span class="project-tool-tag">Power BI · DAX</span>
+      <h3 class="project-title">Sales Performance & Profitability Dashboard</h3>
+      <p class="project-desc">
+        Built an end-to-end Power BI dashboard to help retail decision-makers answer critical profitability questions. Used Power Query for data cleaning and DAX to create dynamic measures including revenue, profit, and profit margins across suppliers and product lines.
+      </p>
+      <div class="project-links">
+        <a href="project5.html" class="project-link">Case Study</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">PROJECT 02</div>
+      <span class="project-tool-tag">SQL</span>
+      <h3 class="project-title">Car Sales Performance Analysis</h3>
+      <p class="project-desc">
+        Analyzed transaction-level car sales data using structured SQL queries to extract insights on customer income distribution, total revenue, dealer performance, and company-level trends. Results support sales strategy and customer segmentation decisions.
+      </p>
+      <div class="project-links">
+        <a href="https://github.com/damilola-korede/SQL-Code/blob/main/Car%20Sales%20Data%20SQLQuery4.sql" class="project-link github" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">PROJECT 03</div>
+      <span class="project-tool-tag">SAS · Excel · Python</span>
+      <h3 class="project-title">Noiler Chicken Egg Weight Prediction</h3>
+      <p class="project-desc">
+        Developed multiple linear regression models to predict egg weight from external parameters (length, width, etc.). Used SAS for regression analysis, Excel for data management, and Python Matplotlib for visualizations.
+      </p>
+      <div class="project-links">
+        <a href="project4.html" class="project-link">Case Study</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">PROJECT 04</div>
+      <span class="project-tool-tag">Python · K-Means · PCA</span>
+      <h3 class="project-title">Clustering Small Business Owners with K-Means</h3>
+      <p class="project-desc">
+        Analyzed financial profiles of small business owners, performed EDA, dimensionality reduction with PCA, and segmented them into meaningful clusters using K-Means. Visualizations built with Matplotlib, Seaborn, and Plotly.
+      </p>
+      <div class="project-links">
+        <a href="project1.html" class="project-link">Case Study</a>
+        <a href="https://github.com/damilola-korede/Python_Data_Analysis_codes/blob/main/Kmeans%20Clustering%20for%20small%20businesses.ipynb" class="project-link github" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">PROJECT 05</div>
+      <span class="project-tool-tag">Python · Random Forest</span>
+      <h3 class="project-title">Predicting Bankruptcy with Machine Learning</h3>
+      <p class="project-desc">
+        Built a Random Forest Classifier to predict company bankruptcy from financial indicators. Handled imbalanced datasets during preprocessing and evaluated performance using confusion matrix and other metrics.
+      </p>
+      <div class="project-links">
+        <a href="project2.html" class="project-link">Case Study</a>
+        <a href="https://github.com/damilola-korede/Python_Data_Analysis_codes/blob/main/Bankruptcy.ipynb" class="project-link github" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-num">PROJECT 06</div>
+      <span class="project-tool-tag">Python · Ridge Regression</span>
+      <h3 class="project-title">Apartment Initial Pricing Analysis & Prediction</h3>
+      <p class="project-desc">
+        Analyzed initial apartment costs across New York boroughs, identified pricing trends, and built Ridge regression models to predict future values. Added interactive widgets with ipywidgets for exploratory analysis.
+      </p>
+      <div class="project-links">
+        <a href="project3.html" class="project-link">Case Study</a>
+        <a href="https://github.com/damilola-korede/Python_Data_Analysis_codes/blob/main/Initial%20Price%20Prediction.ipynb" class="project-link github" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <div class="section-header reveal" style="margin-bottom:2rem;">
+      <span class="section-num">02 /</span>
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-text reveal">
+      <p>
+        I'm <strong>Sodiq Adekunle</strong>, a Data Scientist and Analyst with a passion for turning complex, raw data into clear narratives that drive business value.
+      </p>
+      <p>
+        My work spans <strong>predictive modeling, business intelligence dashboards, exploratory data analysis, and machine learning</strong> — with a strong focus on making insights accessible and actionable for stakeholders.
+      </p>
+      <p>
+        Whether it's predicting bankruptcy risk with Random Forest, clustering customer segments with K-Means, or building an executive-level Power BI dashboard, I bring both <strong>technical rigor and business context</strong> to every project.
+      </p>
+    </div>
+    <div class="tools-section reveal">
+      <div class="tools-label">// Tools & Technologies</div>
+      <div class="tools-list">
+        <span class="tool-tag">Python</span>
+        <span class="tool-tag">Pandas</span>
+        <span class="tool-tag">NumPy</span>
+        <span class="tool-tag">Scikit-learn</span>
+        <span class="tool-tag">Matplotlib</span>
+        <span class="tool-tag">Seaborn</span>
+        <span class="tool-tag">Plotly</span>
+        <span class="tool-tag">Power BI</span>
+        <span class="tool-tag">DAX</span>
+        <span class="tool-tag">SQL</span>
+        <span class="tool-tag">SAS</span>
+        <span class="tool-tag">Excel</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-right reveal">
+    <div class="tools-label" style="margin-bottom:1rem;">// Specializations</div>
+    <div class="experience-card">
+      <div class="exp-type">01 — Analytics</div>
+      <div class="exp-title">Data Science & Analysis</div>
+      <div class="exp-desc">End-to-end data pipelines from cleaning and EDA to insight generation and storytelling. Python-first with strong SQL foundations.</div>
+    </div>
+    <div class="experience-card">
+      <div class="exp-type">02 — Intelligence</div>
+      <div class="exp-title">Business Intelligence</div>
+      <div class="exp-desc">Interactive dashboards and reports in Power BI that help decision-makers understand performance at a glance.</div>
+    </div>
+    <div class="experience-card">
+      <div class="exp-type">03 — Modeling</div>
+      <div class="exp-title">Machine Learning</div>
+      <div class="exp-desc">Classification, regression, clustering, and dimensionality reduction — built and evaluated with Scikit-learn and SAS.</div>
+    </div>
+    <div class="experience-card">
+      <div class="exp-type">04 — Research</div>
+      <div class="exp-title">Research & Statistical Analysis</div>
+      <div class="exp-desc">Rigorous quantitative research methodology, regression modeling, and hypothesis testing applied to real-world datasets.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-label">// Let's Work Together</div>
+  <h2 class="contact-heading">Got a project<br>in <em>mind?</em></h2>
+  <p class="contact-sub">For data projects, consulting, collaborations or just to connect — my inbox is always open.</p>
+  <a href="mailto:sodiqadekunle54321@gmail.com" class="contact-email">sodiqadekunle54321@gmail.com</a>
+  <div class="social-links">
+    <a href="https://www.linkedin.com/in/sodiq-adekunle-79381a201/" target="_blank" class="social-link">↗ LinkedIn</a>
+    <a href="https://x.com/Adekunl40642977" target="_blank" class="social-link">↗ Twitter / X</a>
+    <a href="https://drive.google.com/file/d/1_CsM5afkT_y94GV1ARpXX8L6drMx3aSq/view?usp=sharing" target="_blank" class="social-link">↗ Résumé</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Sodiq Adekunle. Built with intention.</p>
+  <p>Data Scientist & Analyst — Lagos, Nigeria</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const follower = document.getElementById('cursorFollower');
+  let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX - 6 + 'px';
+    cursor.style.top = mouseY - 6 + 'px';
+  });
+
+  function animateFollower() {
+    followerX += (mouseX - followerX) * 0.12;
+    followerY += (mouseY - followerY) * 0.12;
+    follower.style.left = followerX - 20 + 'px';
+    follower.style.top = followerY - 20 + 'px';
+    requestAnimationFrame(animateFollower);
+  }
+  animateFollower();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2)';
+      follower.style.transform = 'scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      follower.style.transform = 'scale(1)';
+    });
+  });
+
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
