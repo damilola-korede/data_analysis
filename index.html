@@ -27,32 +27,8 @@
     color: var(--text);
     font-family: 'Montserrat', sans-serif;
     overflow-x: hidden;
-    cursor: none;
   }
 
-  /* Custom cursor */
-  .cursor {
-    width: 12px; height: 12px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s ease, opacity 0.15s ease;
-    mix-blend-mode: difference;
-  }
-  .cursor-follower {
-    width: 40px; height: 40px;
-    border: 1px solid var(--accent);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transition: all 0.25s ease;
-    opacity: 0.4;
-  }
-
-  /* Noise overlay */
   body::before {
     content: '';
     position: fixed;
@@ -63,7 +39,6 @@
     opacity: 0.4;
   }
 
-  /* NAV */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -81,29 +56,23 @@
     backdrop-filter: blur(12px);
   }
   .nav-logo {
-    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 1.1rem;
     color: var(--accent);
     text-decoration: none;
-    letter-spacing: -0.02em;
   }
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     color: var(--muted);
     text-decoration: none;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    font-weight: 600;
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--accent); }
 
-  /* HERO */
   .hero {
     min-height: 100vh;
     display: grid;
@@ -114,8 +83,7 @@
     gap: 4rem;
   }
   .hero-grid-lines {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background-image:
       linear-gradient(var(--border) 1px, transparent 1px),
       linear-gradient(90deg, var(--border) 1px, transparent 1px);
@@ -138,9 +106,10 @@
     background: rgba(200,245,66,0.08);
     border: 1px solid rgba(200,245,66,0.2);
     color: var(--accent);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
+    font-weight: 600;
     padding: 0.4rem 0.9rem;
     border-radius: 2px;
     margin-bottom: 2rem;
@@ -158,7 +127,6 @@
     50% { opacity: 0.4; transform: scale(0.8); }
   }
   .hero-name {
-    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: clamp(3rem, 6vw, 5.5rem);
     line-height: 0.95;
@@ -167,14 +135,9 @@
     margin-bottom: 0.5rem;
     animation: fadeUp 0.6s 0.1s ease both;
   }
-  .hero-name span {
-    color: var(--accent);
-    font-family: 'Montserrat', sans-serif;
-    font-style: italic;
-    font-weight: 400;
-  }
+  .hero-name span { color: var(--accent); font-style: italic; font-weight: 400; }
   .hero-title {
-    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    font-size: clamp(1rem, 2vw, 1.3rem);
     color: var(--muted);
     margin-bottom: 2rem;
     font-weight: 300;
@@ -186,12 +149,11 @@
     color: #8888a0;
     max-width: 440px;
     margin-bottom: 2.5rem;
+    font-weight: 400;
     animation: fadeUp 0.6s 0.3s ease both;
   }
   .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    display: flex; gap: 1rem; flex-wrap: wrap;
     animation: fadeUp 0.6s 0.4s ease both;
   }
   .btn-primary {
@@ -200,39 +162,32 @@
     padding: 0.85rem 2rem;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     text-decoration: none;
     border: none;
-    cursor: none;
+    display: inline-block;
     transition: transform 0.2s, box-shadow 0.2s;
   }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(200,245,66,0.3);
-  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,245,66,0.3); }
   .btn-ghost {
     background: transparent;
     color: var(--text);
     padding: 0.85rem 2rem;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     text-decoration: none;
     border: 1px solid var(--border);
-    cursor: none;
+    display: inline-block;
     transition: border-color 0.2s, color 0.2s;
   }
   .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* Hero visual */
-  .hero-visual {
-    position: relative;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
+  .hero-visual { position: relative; animation: fadeUp 0.8s 0.2s ease both; }
   .hero-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -247,89 +202,31 @@
     height: 2px;
     background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
   }
-  .skill-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
+  .card-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; font-weight: 600; }
+  .card-title { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+  .skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.5rem; }
   .skill-item {
     background: var(--surface);
     border: 1px solid var(--border);
     padding: 0.75rem 1rem;
     font-size: 0.72rem;
     color: var(--muted);
-    letter-spacing: 0.05em;
+    font-weight: 400;
     transition: border-color 0.2s, color 0.2s;
   }
   .skill-item:hover { border-color: var(--accent); color: var(--accent); }
-  .skill-item strong {
-    display: block;
-    color: var(--text);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
-    margin-bottom: 0.2rem;
-  }
-  .card-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
-  }
-  .card-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--white);
-  }
-  .stat-row {
-    display: flex;
-    gap: 2rem;
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-  }
+  .skill-item strong { display: block; color: var(--text); font-size: 0.78rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .stat-row { display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
   .stat { text-align: center; }
-  .stat-num {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--accent);
-    line-height: 1;
-  }
+  .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
   .stat-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; margin-top: 0.2rem; }
 
-  /* SECTION COMMON */
   section { padding: 6rem 3rem; }
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
-  }
-  .section-num {
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    font-weight: 400;
-  }
-  .section-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    color: var(--white);
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-    max-width: 200px;
-  }
+  .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem; }
+  .section-num { font-size: 0.7rem; color: var(--accent); letter-spacing: 0.15em; font-weight: 600; }
+  .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--white); letter-spacing: -0.03em; line-height: 1; }
+  .section-line { flex: 1; height: 1px; background: var(--border); max-width: 200px; }
 
-  /* PROJECTS */
   #projects { background: var(--surface); }
   .projects-grid {
     display: grid;
@@ -359,13 +256,7 @@
     transition: transform 0.4s ease;
   }
   .project-card:hover::after { transform: scaleX(1); }
-  .project-num {
-    font-size: 0.65rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    margin-bottom: 1.5rem;
-    font-weight: 400;
-  }
+  .project-num { font-size: 0.65rem; color: var(--accent); letter-spacing: 0.15em; margin-bottom: 1.5rem; font-weight: 600; }
   .project-tool-tag {
     display: inline-block;
     background: rgba(91,141,238,0.1);
@@ -374,29 +265,13 @@
     font-size: 0.65rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    font-weight: 600;
     padding: 0.25rem 0.6rem;
     margin-bottom: 1rem;
   }
-  .project-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--white);
-    line-height: 1.3;
-    margin-bottom: 1rem;
-  }
-  .project-desc {
-    font-size: 0.78rem;
-    line-height: 1.85;
-    color: #6b6b80;
-    flex: 1;
-    margin-bottom: 2rem;
-  }
-  .project-links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
+  .project-title { font-size: 1rem; font-weight: 700; color: var(--white); line-height: 1.4; margin-bottom: 1rem; }
+  .project-desc { font-size: 0.78rem; line-height: 1.85; color: #6b6b80; flex: 1; margin-bottom: 2rem; font-weight: 400; }
+  .project-links { display: flex; gap: 1rem; flex-wrap: wrap; }
   .project-link {
     font-size: 0.7rem;
     letter-spacing: 0.1em;
@@ -406,6 +281,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
+    font-weight: 600;
     transition: gap 0.2s;
   }
   .project-link:hover { gap: 0.7rem; }
@@ -413,44 +289,22 @@
   .project-link.github { color: var(--muted); }
   .project-link.github:hover { color: var(--text); }
 
-  /* ABOUT */
-  #about {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
-  .about-text p {
-    font-size: 0.85rem;
-    line-height: 2;
-    color: #8888a0;
-    margin-bottom: 1.5rem;
-  }
-  .about-text p strong { color: var(--text); font-weight: 400; }
+  #about { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .about-text p { font-size: 0.85rem; line-height: 2; color: #8888a0; margin-bottom: 1.5rem; font-weight: 400; }
+  .about-text p strong { color: var(--text); font-weight: 600; }
   .tools-section { margin-top: 3rem; }
-  .tools-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-  .tools-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+  .tools-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 600; }
+  .tools-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .tool-tag {
     background: var(--surface);
     border: 1px solid var(--border);
     color: var(--muted);
     font-size: 0.72rem;
     padding: 0.35rem 0.8rem;
-    letter-spacing: 0.05em;
+    font-weight: 500;
     transition: border-color 0.2s, color 0.2s;
   }
   .tool-tag:hover { border-color: var(--accent); color: var(--accent); }
-  .about-right {}
   .experience-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -467,27 +321,10 @@
     transition: background 0.2s;
   }
   .experience-card:hover::before { background: var(--accent); }
-  .exp-type {
-    font-size: 0.65rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-  .exp-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-  .exp-desc {
-    font-size: 0.75rem;
-    line-height: 1.7;
-    color: var(--muted);
-  }
+  .exp-type { font-size: 0.65rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600; }
+  .exp-title { font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+  .exp-desc { font-size: 0.75rem; line-height: 1.7; color: var(--muted); font-weight: 400; }
 
-  /* CONTACT */
   #contact {
     background: var(--surface);
     text-align: center;
@@ -498,7 +335,6 @@
   #contact::before {
     content: 'CONNECT';
     position: absolute;
-    font-family: 'Montserrat', sans-serif;
     font-size: 20vw;
     font-weight: 800;
     color: rgba(255,255,255,0.015);
@@ -507,40 +343,12 @@
     pointer-events: none;
     white-space: nowrap;
   }
-  .contact-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-  }
-  .contact-heading {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 800;
-    color: var(--white);
-    letter-spacing: -0.04em;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-  }
-  .contact-heading em {
-    font-family: 'Montserrat', sans-serif;
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-  }
-  .contact-sub {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 3rem;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.8;
-  }
+  .contact-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; font-weight: 600; }
+  .contact-heading { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; color: var(--white); letter-spacing: -0.04em; line-height: 1; margin-bottom: 1.5rem; }
+  .contact-heading em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .contact-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 3rem; max-width: 400px; margin-left: auto; margin-right: auto; line-height: 1.8; font-weight: 400; }
   .contact-email {
     display: inline-block;
-    font-family: 'Montserrat', sans-serif;
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text);
@@ -551,65 +359,56 @@
     transition: color 0.2s;
   }
   .contact-email:hover { color: var(--accent); }
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-  }
+  .social-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
   .social-link {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     color: var(--muted);
     text-decoration: none;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    font-weight: 600;
     border: 1px solid var(--border);
     padding: 0.7rem 1.5rem;
     transition: border-color 0.2s, color 0.2s;
   }
   .social-link:hover { border-color: var(--accent); color: var(--accent); }
 
-  /* FOOTER */
   footer {
     padding: 2rem 3rem;
     border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
-  footer p { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; }
+  footer p { font-size: 0.7rem; color: var(--muted); }
 
-  /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* RESPONSIVE */
   @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
     #about { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
     nav { padding: 1.2rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
+    .nav-links { gap: 1.2rem; }
     section { padding: 4rem 1.5rem; }
     .projects-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
   }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="cursorFollower"></div>
 
-<!-- NAV -->
+
 <nav id="nav">
   <a href="#" class="nav-logo">S.A</a>
   <ul class="nav-links">
@@ -620,118 +419,75 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-grid-lines"></div>
   <div class="hero-glow"></div>
-
   <div class="hero-content">
     <div class="hero-tag">Available for opportunities</div>
     <h1 class="hero-name">Sodiq<br><span>Adekunle</span></h1>
     <p class="hero-title">Data Scientist & Analyst</p>
-    <p class="hero-desc">
-      Specializing in machine learning, data visualization, and business intelligence.
-      I turn messy data into clear, actionable insights that drive real decisions.
-    </p>
+    <p class="hero-desc">Specializing in machine learning, data visualization, and business intelligence. I turn messy data into clear, actionable insights that drive real decisions.</p>
     <div class="hero-ctas">
       <a href="#projects" class="btn-primary">View Projects</a>
       <a href="#contact" class="btn-ghost">Get In Touch</a>
     </div>
   </div>
-
   <div class="hero-visual">
     <div class="hero-card">
       <div class="card-label">// Core Expertise</div>
       <div class="card-title">Data Science & Analytics</div>
       <div class="skill-grid">
-        <div class="skill-item">
-          <strong>Data Analysis</strong>
-          Python · Pandas · NumPy
-        </div>
-        <div class="skill-item">
-          <strong>Visualization</strong>
-          Power BI · Plotly · Seaborn
-        </div>
-        <div class="skill-item">
-          <strong>Machine Learning</strong>
-          Scikit-learn · SAS
-        </div>
-        <div class="skill-item">
-          <strong>Databases</strong>
-          SQL · Excel · Power Query
-        </div>
+        <div class="skill-item"><strong>Data Analysis</strong>Python · Pandas · NumPy</div>
+        <div class="skill-item"><strong>Visualization</strong>Power BI · Plotly · Seaborn</div>
+        <div class="skill-item"><strong>Machine Learning</strong>Scikit-learn · SAS</div>
+        <div class="skill-item"><strong>Databases</strong>SQL · Excel · Power Query</div>
       </div>
       <div class="stat-row">
-        <div class="stat">
-          <div class="stat-num">6+</div>
-          <div class="stat-label">Projects</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">4+</div>
-          <div class="stat-label">Tools</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">ML</div>
-          <div class="stat-label">Specialist</div>
-        </div>
+        <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Projects</div></div>
+        <div class="stat"><div class="stat-num">4+</div><div class="stat-label">Tools</div></div>
+        <div class="stat"><div class="stat-num">ML</div><div class="stat-label">Specialist</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="section-header reveal">
     <span class="section-num">01 /</span>
     <h2 class="section-title">Projects</h2>
     <div class="section-line"></div>
   </div>
-
   <div class="projects-grid">
 
     <div class="project-card reveal">
       <div class="project-num">PROJECT 01</div>
       <span class="project-tool-tag">Power BI · DAX</span>
       <h3 class="project-title">Sales Performance & Profitability Dashboard</h3>
-      <p class="project-desc">
-        Built an end-to-end Power BI dashboard to help retail decision-makers answer critical profitability questions. Used Power Query for data cleaning and DAX to create dynamic measures including revenue, profit, and profit margins across suppliers and product lines.
-      </p>
-      <div class="project-links">
-        <a href="project5.html" class="project-link">Case Study</a>
-      </div>
+      <p class="project-desc">Built an end-to-end Power BI dashboard to help retail decision-makers answer critical profitability questions. Used Power Query for data cleaning and DAX to create dynamic measures including revenue, profit, and profit margins across suppliers and product lines.</p>
+      <div class="project-links"><a href="project5.html" class="project-link">Case Study</a></div>
     </div>
 
     <div class="project-card reveal">
       <div class="project-num">PROJECT 02</div>
       <span class="project-tool-tag">SQL</span>
       <h3 class="project-title">Car Sales Performance Analysis</h3>
-      <p class="project-desc">
-        Analyzed transaction-level car sales data using structured SQL queries to extract insights on customer income distribution, total revenue, dealer performance, and company-level trends. Results support sales strategy and customer segmentation decisions.
-      </p>
-      <div class="project-links">
-        <a href="https://github.com/damilola-korede/SQL-Code/blob/main/Car%20Sales%20Data%20SQLQuery4.sql" class="project-link github" target="_blank">GitHub</a>
-      </div>
+      <p class="project-desc">Analyzed transaction-level car sales data using structured SQL queries to extract insights on customer income distribution, total revenue, dealer performance, and company-level trends. Results support sales strategy and customer segmentation decisions.</p>
+      <div class="project-links"><a href="https://github.com/damilola-korede/SQL-Code/blob/main/Car%20Sales%20Data%20SQLQuery4.sql" class="project-link github" target="_blank">GitHub</a></div>
     </div>
 
     <div class="project-card reveal">
       <div class="project-num">PROJECT 03</div>
       <span class="project-tool-tag">SAS · Excel · Python</span>
       <h3 class="project-title">Noiler Chicken Egg Weight Prediction</h3>
-      <p class="project-desc">
-        Developed multiple linear regression models to predict egg weight from external parameters (length, width, etc.). Used SAS for regression analysis, Excel for data management, and Python Matplotlib for visualizations.
-      </p>
-      <div class="project-links">
-        <a href="project4.html" class="project-link">Case Study</a>
-      </div>
+      <p class="project-desc">Developed multiple linear regression models to predict egg weight from external parameters (length, width, etc.). Used SAS for regression analysis, Excel for data management, and Python Matplotlib for visualizations.</p>
+      <div class="project-links"><a href="project4.html" class="project-link">Case Study</a></div>
     </div>
 
     <div class="project-card reveal">
       <div class="project-num">PROJECT 04</div>
       <span class="project-tool-tag">Python · K-Means · PCA</span>
       <h3 class="project-title">Clustering Small Business Owners with K-Means</h3>
-      <p class="project-desc">
-        Analyzed financial profiles of small business owners, performed EDA, dimensionality reduction with PCA, and segmented them into meaningful clusters using K-Means. Visualizations built with Matplotlib, Seaborn, and Plotly.
-      </p>
+      <p class="project-desc">Analyzed financial profiles of small business owners, performed EDA, dimensionality reduction with PCA, and segmented them into meaningful clusters using K-Means. Visualizations built with Matplotlib, Seaborn, and Plotly.</p>
       <div class="project-links">
         <a href="project1.html" class="project-link">Case Study</a>
         <a href="https://github.com/damilola-korede/Python_Data_Analysis_codes/blob/main/Kmeans%20Clustering%20for%20small%20businesses.ipynb" class="project-link github" target="_blank">GitHub</a>
@@ -742,9 +498,7 @@
       <div class="project-num">PROJECT 05</div>
       <span class="project-tool-tag">Python · Random Forest</span>
       <h3 class="project-title">Predicting Bankruptcy with Machine Learning</h3>
-      <p class="project-desc">
-        Built a Random Forest Classifier to predict company bankruptcy from financial indicators. Handled imbalanced datasets during preprocessing and evaluated performance using confusion matrix and other metrics.
-      </p>
+      <p class="project-desc">Built a Random Forest Classifier to predict company bankruptcy from financial indicators. Handled imbalanced datasets during preprocessing and evaluated performance using confusion matrix and other metrics.</p>
       <div class="project-links">
         <a href="project2.html" class="project-link">Case Study</a>
         <a href="https://github.com/damilola-korede/Python_Data_Analysis_codes/blob/main/Bankruptcy.ipynb" class="project-link github" target="_blank">GitHub</a>
@@ -755,9 +509,7 @@
       <div class="project-num">PROJECT 06</div>
       <span class="project-tool-tag">Python · Ridge Regression</span>
       <h3 class="project-title">Apartment Initial Pricing Analysis & Prediction</h3>
-      <p class="project-desc">
-        Analyzed initial apartment costs across New York boroughs, identified pricing trends, and built Ridge regression models to predict future values. Added interactive widgets with ipywidgets for exploratory analysis.
-      </p>
+      <p class="project-desc">Analyzed initial apartment costs across New York boroughs, identified pricing trends, and built Ridge regression models to predict future values. Added interactive widgets with ipywidgets for exploratory analysis.</p>
       <div class="project-links">
         <a href="project3.html" class="project-link">Case Study</a>
         <a href="https://github.com/damilola-korede/Python_Data_Analysis_codes/blob/main/Initial%20Price%20Prediction.ipynb" class="project-link github" target="_blank">GitHub</a>
@@ -767,7 +519,6 @@
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="about-left">
     <div class="section-header reveal" style="margin-bottom:2rem;">
@@ -775,15 +526,9 @@
       <h2 class="section-title">About</h2>
     </div>
     <div class="about-text reveal">
-      <p>
-        I'm <strong>Sodiq Adekunle</strong>, a Data Scientist and Analyst with a passion for turning complex, raw data into clear narratives that drive business value.
-      </p>
-      <p>
-        My work spans <strong>predictive modeling, business intelligence dashboards, exploratory data analysis, and machine learning</strong> — with a strong focus on making insights accessible and actionable for stakeholders.
-      </p>
-      <p>
-        Whether it's predicting bankruptcy risk with Random Forest, clustering customer segments with K-Means, or building an executive-level Power BI dashboard, I bring both <strong>technical rigor and business context</strong> to every project.
-      </p>
+      <p>I'm <strong>Sodiq Adekunle</strong>, a Data Scientist and Analyst with a passion for turning complex, raw data into clear narratives that drive business value.</p>
+      <p>My work spans <strong>predictive modeling, business intelligence dashboards, exploratory data analysis, and machine learning</strong> — with a strong focus on making insights accessible and actionable for stakeholders.</p>
+      <p>Whether it's predicting bankruptcy risk with Random Forest, clustering customer segments with K-Means, or building an executive-level Power BI dashboard, I bring both <strong>technical rigor and business context</strong> to every project.</p>
     </div>
     <div class="tools-section reveal">
       <div class="tools-label">// Tools & Technologies</div>
@@ -803,7 +548,6 @@
       </div>
     </div>
   </div>
-
   <div class="about-right reveal">
     <div class="tools-label" style="margin-bottom:1rem;">// Specializations</div>
     <div class="experience-card">
@@ -829,12 +573,11 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="contact-label">// Let's Work Together</div>
   <h2 class="contact-heading">Got a project<br>in <em>mind?</em></h2>
   <p class="contact-sub">For data projects, consulting, collaborations or just to connect — my inbox is always open.</p>
-  <a href="/cdn-cgi/l/email-protection#e5968a818c948481808e908b8980d0d1d6d7d4a58288848c89cb868a88" class="contact-email"><span class="__cf_email__" data-cfemail="9ae9f5fef3ebfbfefff1eff4f6ffafaea9a8abdafdf7fbf3f6b4f9f5f7">[email&#160;protected]</span></a>
+  <a href="mailto:sodiqadekunle54321@gmail.com" class="contact-email">sodiqadekunle54321@gmail.com</a>
   <div class="social-links">
     <a href="https://www.linkedin.com/in/sodiq-adekunle-79381a201/" target="_blank" class="social-link">↗ LinkedIn</a>
     <a href="https://x.com/Adekunl40642977" target="_blank" class="social-link">↗ Twitter / X</a>
@@ -842,50 +585,24 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2025 Sodiq Adekunle. Built with intention.</p>
   <p>Data Scientist & Analyst — Lagos, Nigeria</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const follower = document.getElementById('cursorFollower');
-  let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
+<script>
 
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    cursor.style.left = mouseX - 6 + 'px';
-    cursor.style.top = mouseY - 6 + 'px';
-  });
 
-  function animateFollower() {
-    followerX += (mouseX - followerX) * 0.12;
-    followerY += (mouseY - followerY) * 0.12;
-    follower.style.left = followerX - 20 + 'px';
-    follower.style.top = followerY - 20 + 'px';
-    requestAnimationFrame(animateFollower);
-  }
-  animateFollower();
-
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'scale(2)';
-      follower.style.transform = 'scale(1.5)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'scale(1)';
-      follower.style.transform = 'scale(1)';
-    });
-  });
-
-  // Nav scroll effect
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  });
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
 
-  // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries =>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
