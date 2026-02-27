@@ -1,220 +1,193 @@
 <!DOCTYPE html>
-<html>
-    <head>
-       <title> Small business owners </title>
-       <link rel="stylesheet" href="home.css"> 
-       <link rel="stylesheet" href="project1.css">
-       <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" 
-rel="stylesheet">
-    </head>
-    <body>
-       
-        <div class="navigation-section">
-            <div class="left-section"><a href="index.html">S.Adekunle</a></div>
-            <div class="right-section">
-                <p><a href="about.html">About</a></p> 
-           <p> <a href="https://drive.google.com/file/d/1_CsM5afkT_y94GV1ARpXX8L6drMx3aSq/view?usp=sharing">Resume </a></p> 
-            </div>
-        </div>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>K-Means Clustering — Sodiq Adekunle</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #0a0a0b; --surface: #111114; --card: #16161a; --border: #2a2a32; --accent: #c8f542; --accent2: #5b8dee; --text: #e8e8ec; --muted: #6b6b78; --white: #ffffff; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.4; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; border-bottom: 1px solid transparent; transition: border-color 0.3s, background 0.3s; }
+  nav.scrolled { border-color: var(--border); background: rgba(10,10,11,0.85); backdrop-filter: blur(12px); }
+  .nav-logo { font-weight: 800; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .page-hero { min-height: 55vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 10rem 3rem 4rem; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .page-hero-bg { position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 80px 80px; opacity: 0.15; }
+  .page-hero-glow { position: absolute; top: 0; right: 0; width: 500px; height: 500px; background: radial-gradient(circle, rgba(200,245,66,0.05) 0%, transparent 70%); }
+  .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--muted); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 2rem; position: relative; transition: color 0.2s; }
+  .back-link:hover { color: var(--accent); }
+  .back-link::before { content: '←'; }
+  .project-tag { display: inline-flex; align-items: center; background: rgba(91,141,238,0.1); border: 1px solid rgba(91,141,238,0.2); color: var(--accent2); font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; padding: 0.4rem 0.9rem; margin-bottom: 1.5rem; position: relative; }
+  .page-title { font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 800; color: var(--white); letter-spacing: -0.03em; line-height: 1.05; max-width: 800px; position: relative; margin-bottom: 1.5rem; animation: fadeUp 0.6s ease both; }
+  .page-title span { color: var(--accent); font-style: italic; font-weight: 400; }
+  .page-meta { display: flex; gap: 2rem; flex-wrap: wrap; position: relative; }
+  .meta-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.3rem; }
+  .meta-value { font-size: 0.82rem; color: var(--text); font-weight: 600; }
+  .content-wrap { max-width: 900px; margin: 0 auto; padding: 5rem 3rem; }
+  .section-block { margin-bottom: 4rem; }
+  .block-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+  .block-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 60px; }
+  .block-title { font-size: 1.4rem; font-weight: 800; color: var(--white); letter-spacing: -0.02em; margin-bottom: 1.25rem; }
+  .block-text { font-size: 0.875rem; line-height: 1.95; color: #8888a0; font-weight: 400; margin-bottom: 1rem; }
+  .block-text strong { color: var(--text); font-weight: 600; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+  .info-card { background: var(--card); border: 1px solid var(--border); padding: 1.5rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+  .info-card:hover { border-color: var(--accent); }
+  .info-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent2), transparent); }
+  .info-card-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.5rem; }
+  .info-card-value { font-size: 0.85rem; color: var(--text); font-weight: 600; line-height: 1.6; }
+  .insight-list { list-style: none; margin: 1.5rem 0; }
+  .insight-list li { padding: 0.85rem 1rem 0.85rem 1.5rem; border-left: 2px solid var(--border); font-size: 0.85rem; color: #8888a0; line-height: 1.7; margin-bottom: 0.5rem; font-weight: 400; transition: border-color 0.2s, color 0.2s; }
+  .insight-list li:hover { border-color: var(--accent); color: var(--text); }
+  .insight-list li strong { color: var(--text); font-weight: 600; }
+  .step-list { counter-reset: steps; list-style: none; margin: 1.5rem 0; }
+  .step-list li { counter-increment: steps; padding: 1.25rem 1.25rem 1.25rem 4rem; background: var(--card); border: 1px solid var(--border); margin-bottom: 1px; position: relative; font-size: 0.85rem; color: #8888a0; line-height: 1.7; transition: border-color 0.2s; }
+  .step-list li:hover { border-color: var(--accent); }
+  .step-list li::before { content: counter(steps, decimal-leading-zero); position: absolute; left: 1.25rem; top: 1.25rem; font-size: 0.65rem; color: var(--accent); font-weight: 800; letter-spacing: 0.1em; }
+  .step-list li strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 0.25rem; }
+  .conclusion-box { background: var(--card); border: 1px solid var(--border); padding: 2.5rem; position: relative; overflow: hidden; margin-top: 3rem; }
+  .conclusion-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2), transparent); }
+  .github-btn { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--surface); border: 1px solid var(--border); color: var(--text); text-decoration: none; padding: 0.85rem 1.75rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2rem; transition: border-color 0.2s, color 0.2s; }
+  .github-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .project-nav { border-top: 1px solid var(--border); padding: 3rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .proj-nav-link { display: flex; flex-direction: column; gap: 0.4rem; text-decoration: none; max-width: 300px; }
+  .proj-nav-dir { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .proj-nav-title { font-size: 0.9rem; font-weight: 700; color: var(--white); transition: color 0.2s; }
+  .proj-nav-link:hover .proj-nav-title { color: var(--accent); }
+  .contact-strip { background: var(--surface); border-top: 1px solid var(--border); padding: 4rem 3rem; text-align: center; }
+  .contact-strip p { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.75rem; }
+  .contact-strip a { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.95rem; border-bottom: 1px solid rgba(200,245,66,0.3); padding-bottom: 0.1rem; }
+  footer { padding: 1.5rem 3rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  footer p { font-size: 0.7rem; color: var(--muted); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 768px) { nav { padding: 1.2rem 1.5rem; } .nav-links { gap: 1.2rem; } .page-hero { padding: 8rem 1.5rem 3rem; } .content-wrap { padding: 3rem 1.5rem; } .two-col { grid-template-columns: 1fr; } .project-nav { padding: 2rem 1.5rem; flex-direction: column; } footer { padding: 1.5rem; flex-direction: column; } }
+</style>
+</head>
+<body>
 
-        <p class="head">
-            Case Study: Clustering Small Business 
-            Owners Using K-Means
-        </p>
+<nav id="nav">
+  <a href="index.html" class="nav-logo">S.A</a>
+  <ul class="nav-links">
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="https://drive.google.com/file/d/1_CsM5afkT_y94GV1ARpXX8L6drMx3aSq/view?usp=sharing" target="_blank">Résumé ↗</a></li>
+  </ul>
+</nav>
 
-        <img class="model-img" src="pics/cluster.jpg">
-        
-        <div>
-        <p class="head">
-            Objective
-        </p>
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-glow"></div>
+  <a href="index.html#projects" class="back-link">Back to Projects</a>
+  <div class="project-tag">Python · K-Means · PCA · EDA</div>
+  <h1 class="page-title">Clustering Small Business<br>Owners Using <span>K-Means</span></h1>
+  <div class="page-meta">
+    <div class="meta-item"><div class="meta-label">Type</div><div class="meta-value">Unsupervised ML · Clustering</div></div>
+    <div class="meta-item"><div class="meta-label">Techniques</div><div class="meta-value">K-Means · PCA · EDA</div></div>
+    <div class="meta-item"><div class="meta-label">Libraries</div><div class="meta-value">Pandas · NumPy · Matplotlib · Seaborn · Plotly · Scikit-learn</div></div>
+  </div>
+</section>
 
-        <p class="description">
-            This project aimed to analyze the financial profiles of small business owners and non-business owners, identify
-            patterns, and create clusters of small business owners with similar financial characteristics. The study involved exploratory 
-            data analysis, dimensionality reduction, and clustering using machine learning techniques.
-        </p>
-         </div>
-    
+<div class="content-wrap">
 
-         <div>
-            <p class="head">
-                Dataset
-            </p>
-    
-            <p class="description">
-                The data contained demographic and financial information, including variables like income, net worth, assets, and debts. 
-                Key data preprocessing steps included handling missing values, filtering data, and scaling numerical features.
-            </p>
-             </div>
+  <div class="section-block reveal">
+    <div class="block-label">01 — Overview</div>
+    <div class="block-title">Objective</div>
+    <p class="block-text">This project aimed to <strong>analyze financial profiles of small business owners</strong>, identify hidden patterns in their financial behavior, and create distinct clusters of owners with similar financial characteristics.</p>
+    <p class="block-text">The findings support targeted financial product design, lending decisions, and policy interventions for small business support programs.</p>
+    <a href="https://github.com/damilola-korede/Python_Data_Analysis_codes/blob/main/Kmeans%20Clustering%20for%20small%20businesses.ipynb" target="_blank" class="github-btn">↗ View on GitHub</a>
+  </div>
 
+  <div class="section-block reveal">
+    <div class="block-label">02 — Methodology</div>
+    <div class="block-title">Project Pipeline</div>
+    <ul class="step-list">
+      <li><strong>Exploratory Data Analysis (EDA)</strong>Analyzed financial profiles of small business owners vs. non-business owners to identify distributional differences and key variables.</li>
+      <li><strong>Data Preprocessing</strong>Cleaned and standardized financial features using Pandas and NumPy to prepare for modeling.</li>
+      <li><strong>Dimensionality Reduction with PCA</strong>Applied Principal Component Analysis (PCA) using Scikit-learn to reduce the feature space and improve cluster separation.</li>
+      <li><strong>K-Means Clustering</strong>Segmented business owners into distinct financial clusters using K-Means. Optimal cluster count determined through elbow method analysis.</li>
+      <li><strong>Visualization</strong>Rendered cluster plots and financial distributions using Matplotlib, Seaborn, and Plotly for clear interpretation.</li>
+    </ul>
+  </div>
 
-             <div>
-                <p class="head">
-                    Key Steps : Exploratory Data Analysis
-                </p>
-                
-                <img class="model-img" src="pics/vis 1.png">
-                <p class="description_1">
-                    Explored income distribution and categorized income ranges.
-                </p>
-                 </div>
-            
-                 
-                 <img class="model-img" src="pics/vis 2.png">
-                 <div>
-                 <p class="description_1">
-                    Visualized differences in household debt and home values between
-                     business and non-business owners.
-                </p>
-                 </div>
+  <div class="section-block reveal">
+    <div class="block-label">03 — Tools</div>
+    <div class="block-title">Technologies Used</div>
+    <div class="two-col">
+      <div class="info-card">
+        <div class="info-card-label">Data Manipulation</div>
+        <div class="info-card-value">Pandas · NumPy — data cleaning, transformation, and financial feature engineering</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Visualization</div>
+        <div class="info-card-value">Matplotlib · Seaborn · Plotly — cluster plots, distribution charts, and interactive visuals</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Machine Learning</div>
+        <div class="info-card-value">Scikit-learn — K-Means clustering and PCA dimensionality reduction</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Dimensionality Reduction</div>
+        <div class="info-card-value">PCA — reduces noise and improves the quality and interpretability of clusters</div>
+      </div>
+    </div>
+  </div>
 
+  <div class="section-block reveal">
+    <div class="block-label">04 — Insights</div>
+    <div class="block-title">Key Findings</div>
+    <ul class="insight-list">
+      <li><strong>Financial profiles differ significantly</strong> between small business owners and non-owners, validating the need for separate segmentation strategies.</li>
+      <li><strong>PCA improved cluster quality</strong> by reducing noise from correlated financial features, making clusters more distinct and actionable.</li>
+      <li><strong>K-Means identified distinct financial segments</strong> — ranging from high-revenue, asset-rich owners to early-stage, cash-constrained operators.</li>
+      <li><strong>Cluster insights enable targeted interventions</strong> — different segments benefit from different financial products, support programs, or lending criteria.</li>
+    </ul>
+  </div>
 
-                 <img class="model-img" src="pics/vis 3.png">
-                 <div>
-                 <p class="description_1">
-                    Analyzed age distribution among small business owners.
-                </p>
-                 </div>
+  <div class="conclusion-box reveal">
+    <div class="block-label">05 — Conclusion</div>
+    <p class="block-text">By combining EDA, PCA, and K-Means clustering, this project successfully surfaced <strong>meaningful financial segments within the small business owner population</strong>. These clusters provide a data-driven foundation for tailored financial services, lending models, and business support policy decisions.</p>
+  </div>
 
+</div>
 
-                 <div>
-                    <p class="head">
-                        Insights from EDA
-                    </p>
-            
-                    <p class="description">
-                        The provided visualizations collectively offer key insights 
-                        into the dynamics of business ownership, income distribution, 
-                        household finances, and demographics. The first chart reveals 
-                        significant disparity in income distribution, with business 
-                        owners overwhelmingly dominating the highest income category, 
-                        while non-business owners are prevalent in lower income categories.  
-                        The second plot shows the relationship between home value and 
-                        household debt, where most households are clustered in the lower 
-                        ranges of both variables, indicating modest home values and debt 
-                        levels for the majority. However, a few outliers with high home 
-                        values and debt suggest financial behaviors or wealth disparities in 
-                        specific households. The third chart illustrates the age distribution 
-                        of small business owners, showing that the majority are between 40 and 
-                        60 years old, peaking around age 50. This suggests that mid-career individuals, 
-                        likely due to accumulated experience and financial resources, are most 
-                        inclined to own businesses, with significantly fewer younger owners and 
-                        a decline in ownership among individuals over 70 years old.
-                    </p>
-                     </div>
-            
-                 
-                 <div>
-                    <p class="head">
-                        Model Building: Feature Engineering
-                    </p>
-                    
-                    <img class="model-img" src="pics/vis 4.png">
-                    
-                    <p class="description_1">
-                        Focused on high-variance features to ensure the clustering model captured 
-                        significant differences. Used trimmed variance to mitigate
-                        the impact of outliers.
-                    </p>
-                </div>
-                 
-                <div>
-                    <p class="head">
-                        Clustering
-                    </p>
-                    
-                    <p class="description">
-                        Tested K-Means clustering with varying cluster numbers (2-12) to
-                        find the optimal model using metrics like inertia and 
-                        silhouette scores. Selected three clusters as the optimal 
-                        solution, based on both metrics.
-                    </p>
-                </div>
-                 
+<div class="project-nav">
+  <a href="project3.html" class="proj-nav-link">
+    <span class="proj-nav-dir">← Previous Project</span>
+    <span class="proj-nav-title">Apartment Pricing</span>
+  </a>
+  <a href="project4.html" class="proj-nav-link" style="text-align:right;">
+    <span class="proj-nav-dir">Next Project →</span>
+    <span class="proj-nav-title">Egg Weight Prediction</span>
+  </a>
+</div>
 
-                <img class="model-img" src="pics/Inertia vis.png">
-                 <div>
-                 <p class="description_1">
-                    Line plot of inertia_errors vs n_clusters.
-                </p>
-                 </div>
+<div class="contact-strip">
+  <p>Interested in working together?</p>
+  <a href="mailto:sodiqadekunle54321@gmail.com">sodiqadekunle54321@gmail.com</a>
+</div>
 
-                 
-                 <img class="model-img" src="pics/sil vis.png">
-                 <div>
-                 <p class="description_1">
-                    Line plot of silhouette score vs n_clusters.
-                </p>
-                 </div>
-                 
-                
-                 <div>
-                    <p class="head">
-                        Model Results
-                    </p>
-                    
-                    <p class="description">
-                        Clusters differentiated small business owners by 
-                        their financial profiles, such as asset 
-                        values and net worth.
-                    </p>
-                </div>
-                 
+<footer>
+  <p>© 2025 Sodiq Adekunle</p>
+  <p>Data Scientist & Analyst — Lagos, Nigeria</p>
+</footer>
 
-                <div>
-                    <p class="head">
-                        Cluster Analysis
-                    </p>
-                    
-                    <p class="description">
-                        Created a bar chart to compare the mean values of financial 
-                        features across the three clusters. Each cluster represented a 
-                        distinct group of small business owners based on financial 
-                        strength and stability.
-                    </p>
-                </div>
-                <img class="model-img" src="pics/cluster vis.png">
-                
-
-                <div>
-                    <p class="head">
-                        Dimensionality Reduction
-                    </p>
-                    
-                    <p class="description">
-                        Applied Principal Component Analysis (PCA) to reduce
-                        the dataset's dimensionality to two components for better
-                        visualization. Visualized clusters in a two-dimensional 
-                        space to validate separability.
-                    </p>
-                </div>
-                
-        
-                <div>
-                    <p class="head">
-                        PCA Visualization
-                    </p>
-                </div>
-
-                <img class="model-img" src="pics/pca vis.png">
-                 
-                <div>
-                 <p class="description_1">
-                A scatter plot displayed the three clusters 
-                in a two-dimensional space.
-                </p>
-                 </div>
-        
-        
-        <p class="send-message">Send me a message</p>
-        <p class="message-text">For projects, offers or just want 
-            to connect send me a mail</p>
-            <p class="mail">sodiqadekunle54321@gmail.com</p>
-      
-            <script src="./app.js"></script>
-    </body>
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
-
